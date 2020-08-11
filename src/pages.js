@@ -3,7 +3,7 @@ const Datadase = require('./database/db')
 const { weekdays, getSubject, subjects, convertHoursTuMinutes}= require('./utils/format')
 
 
-function pagelanding(req,res){
+function pageLanding(req,res){
     return res.render( "index.html")
 }
 
@@ -33,7 +33,7 @@ async function pageStudy(req,res){
         const db = await Datadase
         const proffys = await db.all(query);
         proffys.map((proffy)=>{
-            proffys.subject = getSubject(proffy.subject)
+            proffy.subject = getSubject(proffy.subject)
         })
         return res.render("study.html", { proffys, subjects, filters, weekdays})
     } catch (error) {
@@ -86,4 +86,4 @@ async function saveClasses(req,res){
  
 }
 
-module.exports ={ pageGiveClasses, pagelanding, pageStudy, saveClasses}
+module.exports ={ pageGiveClasses, pageLanding, pageStudy, saveClasses}
